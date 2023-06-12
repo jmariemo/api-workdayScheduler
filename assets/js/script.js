@@ -1,22 +1,20 @@
-// function to add current date subtitle in header
-function currentDay() {
-    var currentDay = document.getElementById("currentDay");
-    currentDay.textContent = "Today is " + moment().format("dddd, MMMM Do YYYY");
-}
+$("#currentDay").text("Today is " + moment().format('dddd, MMMM Do YYYY'));
 
-// function to determine hour textarea bg color based on current hour
-function hourColor() {
+// set color to time-block text area depending on hour by adding class
+function setHourColors() {
     var currentHour = dayjs();
-    for (var i = 9; i < 18; i++) {
-        if (i < currentHour.hour()) {
+    for (var i = 9; i <= 17; i++){
+        if(i < currentHour.hour()){
             $("#hour-" + i).addClass("past");
-        } else if (i = currentHour.hour()) {
-            $("hour-" + i).addClass("present");
+        } else if (i == currentHour.hour()) {
+            $("#hour-" + i).addClass("present");
         } else {
-            $("hour-" + i).addClass("future");
+            $("#hour-" + i).addClass("future");
         }
     }
 }
 
-currentDay();
-hourColor();
+// loads color function on start
+$(function() {
+    setHourColors();
+});
